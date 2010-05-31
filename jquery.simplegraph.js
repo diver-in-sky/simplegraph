@@ -84,8 +84,9 @@ function DataSet(data, labels, settings) {
       grid.height
     ).attr({stroke: this.settings.lineColor, fill: this.settings.lineColor, opacity: 0.3}); //TODO PARAMS - legend border and fill style
 
-    for (var i = 1, ii = (grid.rows); i < (ii - this.settings.lowerBound/2); i = i + 2) {
-      var value = (ii - i)*2,
+    var yScale = parseInt((grid.maxValueYAxis - grid.settings.lowerBound) / grid.rows);
+    for (var i = 1, ii = (grid.rows); i < (ii - this.settings.lowerBound); i = i + 1) {
+      var value = (ii - i)*yScale,
           y     = grid.y(value) + 4, // TODO: Value of 4 works for default dimensions, expect will need to scale
           x     = grid.leftEdge - (6 + this.settings.yAxisOffset);    
       canvas.text(x, y, value).attr(this.settings.yAxisLabelStyle);        
@@ -185,7 +186,8 @@ function Grid(dataSet, settings) {
     this.topEdge  = this.settings.topGutter;
     this.width    = this.settings.width - this.settings.leftGutter - this.X;
     this.columns  = this.dataSet.data.length - 1; 
-    this.rows     = (this.maxValueYAxis - this.settings.lowerBound) / 2; //TODO PARAM - steps per row    
+    this.rows     = parseInt((this.maxValueYAxis - this.settings.lowerBound) /
+                              this.settings.stepsPerRow);
   };
 
   this.draw = function(canvas) {
@@ -270,6 +272,7 @@ function Grid(dataSet, settings) {
     gridBorderColor: "#ccc",
     // -- Y Axis Captions
     yAxisOffset: 0,
+    stepsPerRow: 2,
     // -- Y Axis Captions
     xAxisLabelOffset: 0,
     // Graph Style
@@ -297,6 +300,7 @@ function Grid(dataSet, settings) {
     addHover: true,
     // Calculations
     lowerBound: 0
+
   };
   
   // Default hoverIn callback, this is public and as such can be overwritten. You can write your
