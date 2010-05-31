@@ -307,9 +307,10 @@ function Grid(dataSet, settings) {
     if (newcoord.x + 100 > settings.width) {
         newcoord.x -= 114;
     }
-    hoverLabel[0].attr({text: value}).show().animate({x : newcoord.x + 50, y : newcoord.y + 15}, (isLabelVisible ? 100 : 0));
-    hoverLabel[1].attr({text: label}).show().animate({x : newcoord.x + 50, y : newcoord.y + 30}, (isLabelVisible ? 100 : 0));
-    frame.show().animate({x: newcoord.x, y: newcoord.y}, (isLabelVisible ? 100 : 0));
+    var animationSpeed = isLabelVisible ? 100 : 0;
+    frame.show().animate({x: newcoord.x, y: newcoord.y}, animationSpeed);
+    hoverLabel[0].attr({text: value}).show().animate({x : newcoord.x + 50, y : newcoord.y + 15}, animationSpeed).toFront();
+    hoverLabel[1].attr({text: label}).show().animate({x : newcoord.x + 50, y : newcoord.y + 30}, animationSpeed).toFront();
     if (settings.drawPoints) {
       dot.attr("r", settings.activePointRadius);
     }
