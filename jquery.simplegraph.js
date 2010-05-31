@@ -2,6 +2,10 @@ function SimpleGraph(data, labels, canvas, settings) {
 
   this.settings = settings;
 
+  jQuery.each(labels, function(i, val) {
+    labels[i] = jQuery.trim(val);
+  });
+
   setStyleDefaults(settings);
 
   this.dataSet  = new DataSet(data, labels, this.settings);
