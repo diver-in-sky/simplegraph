@@ -138,7 +138,7 @@ function DataSet(data, labels, settings) {
           fill_path[i == 0 ? "lineTo" : "cplineTo"](x, y, dataSet.settings.cpWidth);
         }
         if (dataSet.settings.addHover) {
-          var rect = canvas.rect(x - 50, y - 50, 100, 100).attr({stroke: "none", fill: "#fff", opacity: 0}); //TODO PARAM - hover target width / height
+          var rect = canvas.rect(dataSet.settings.leftGutter + grid.X * i, 0, grid.X, dataSet.settings.height).attr({stroke: "none", fill: "#fff", opacity: 0});
           jQuery(rect[0]).hover( function() {
             jQuery.fn.simplegraph.hoverIn(canvas, value, label, x, y, hoverFrame, hoverText, dot, dataSet.settings);
           }, 
