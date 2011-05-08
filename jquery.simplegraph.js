@@ -88,15 +88,15 @@ function DataSet(data, labels, settings) {
     for (var i = 1, ii = (grid.rows); i < (ii - this.settings.lowerBound); i = i + 1) {
       var value = (ii - i)*yScale,
           y     = grid.y(value) + 4, // TODO: Value of 4 works for default dimensions, expect will need to scale
-          x     = grid.leftEdge - (6 + this.settings.yAxisOffset);    
+          x     = grid.leftEdge - (this.settings.labelYColumnWidth/2 - 10 + this.settings.yAxisOffset);    
       canvas.text(x, y, value).attr(this.settings.yAxisLabelStyle);        
     }
     var caption = canvas.text(
-      grid.leftEdge - (20 + this.settings.yAxisOffset), 
+      grid.leftEdge - (this.settings.labelYColumnWidth - 10 + this.settings.yAxisOffset), 
       (grid.height/2) + (this.settings.yAxisCaption.length / 2), 
       this.settings.yAxisCaption + " (" + this.settings.units + ")").attr(this.settings.yAxisCaptionStyle).rotate(270);
     // Increase the offset for the next caption (if any)
-    this.settings.yAxisOffset = this.settings.yAxisOffset + 30;
+    this.settings.yAxisOffset = this.settings.yAxisOffset + settings.labelYColumnWidth;
   };
 
   this.plot = function(grid, canvas) {
