@@ -78,9 +78,9 @@ function DataSet(data, labels, settings) {
   this.labelYAxis = function(grid, canvas) {
     // Legend
     canvas.rect(
-      grid.leftEdge - (30 + this.settings.yAxisOffset), //TODO PARAM - Label Colum Width
+      grid.leftEdge - (settings.labelYColumnWidth + this.settings.yAxisOffset),
       grid.topEdge, 
-      30, //TODO PARAM - Label Column Width
+      settings.labelYColumnWidth,
       grid.height
     ).attr({stroke: this.settings.lineColor, fill: this.settings.lineColor, opacity: 0.3}); //TODO PARAMS - legend border and fill style
 
@@ -273,6 +273,7 @@ function Grid(dataSet, settings) {
     // -- Y Axis Captions
     yAxisOffset: 0,
     stepsPerRow: 2,
+    labelYColumnWidth: 30,
     // -- Y Axis Captions
     xAxisLabelOffset: 0,
     // Graph Style
